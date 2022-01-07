@@ -1,6 +1,15 @@
 "use strict";
 
-const numberOfFilms = +prompt("Сколько фильмов вы уже посмотрели?", "");
+let numberOfFilms;
+
+function start() {
+    while (numberOfFilms == '' || numberOfFilms == null || numberOfFilms == undefined || isNaN(numberOfFilms)) {
+        numberOfFilms = +prompt("Сколько фильмов вы уже посмотрели?", "");
+    }
+}
+
+start();
+
 const personalMovieDb = {
     count: numberOfFilms,
     movies: {},
@@ -9,15 +18,20 @@ const personalMovieDb = {
     privat: false
 };
 
-for (let i = 0; i < numberOfFilms; i++) {
-    const films = prompt("Один из последних просмотренных фильмов?", ""),
-          ball = prompt("На сколько оцените его?", "");
-    if ((films === "" || ball === "" || films === null || ball === null) || (films.length > 50)) {
-        i--;
-        continue;
+function rememberMyFilms() {
+    for (let i = 0; i < 2; i++) {
+        const films = prompt("Один из последних просмотренных фильмов?", ""),
+              ball = prompt("На сколько оцените его?", "");
+        if (films != "" && ball != "" && films != null && ball != null && films.length < 50) {
+            personalMovieDb.movies[films] = ball;
+        } else {
+            i--;
+        }
+        
     }
-    personalMovieDb.movies[films] = ball;
 }
+
+rememberMyFilms();
 
 if (personalMovieDb.count < 10) {
     console.log("Просмотрено довольно мало фильмов");
