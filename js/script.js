@@ -33,12 +33,31 @@ function rememberMyFilms() {
 
 rememberMyFilms();
 
-if (personalMovieDb.count < 10) {
-    console.log("Просмотрено довольно мало фильмов");
-} else if (personalMovieDb.count > 30) {
-    console.log("Вы киноман");
-} else {
-    console.log("Вы классический зритель");
+function detectPersonalLevel() {
+    if (personalMovieDb.count < 10) {
+        console.log("Просмотрено довольно мало фильмов");
+    } else if (personalMovieDb.count > 30) {
+        console.log("Вы киноман");
+    } else {
+        console.log("Вы классический зритель");
+    }
 }
 
-console.log(personalMovieDb);
+detectPersonalLevel();
+
+function writeYourGenres() {
+    for (let i = 1; i < 4; i++) {
+        const answer = prompt(`Ваш любимый жанр под номером ${i}:`);
+        personalMovieDb.genres.push(answer);
+    }
+}
+
+writeYourGenres();
+
+function showMyDB() {
+    if (!personalMovieDb.privat) {
+        console.log(personalMovieDb);
+    }
+}
+
+showMyDB();
